@@ -1,0 +1,15 @@
+.profile__btn_action_edit {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  background-image: url('../../../../images/profile-btn-edit.svg');
+  background-size: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile__btn_action_edit {
+    width: calc(18px + (24 - 18) * (100vw - 320px) / (1024 - 320));
+    height: calc(18px + (24 - 18) * (100vw - 320px) / (1024 - 320));
+    background-size: calc(7.5px + (10 - 7.5) * (100vw - 320px) / (1024 - 320));
+  }
+}
