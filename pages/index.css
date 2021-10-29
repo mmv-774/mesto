@@ -19,3 +19,5 @@
 @import url('../blocks/photo/__footer/photo__footer.css');
 @import url('../blocks/photo/__caption/photo__caption.css');
 @import url('../blocks/photo/__like/photo__like.css');
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__copyright/footer__copyright.css');

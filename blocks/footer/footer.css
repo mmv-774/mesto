@@ -1,0 +1,14 @@
+.footer {
+  max-width: 880px;
+  padding: 66px 0 60px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1024px) {
+  .footer {
+    max-width: calc(282px + (880 - 282) * (100vw - 320px) / (1024 - 320));
+    padding-top: calc(48px + (66 - 48) * (100vw - 320px) / (1024 - 320));
+    padding-bottom: calc(36px + (60 - 36) * (100vw - 320px) / (1024 - 320));
+  }
+}
