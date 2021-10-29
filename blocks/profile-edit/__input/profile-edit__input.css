@@ -1,0 +1,14 @@
+.profile-edit__input {
+  width: 100%;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  font-weight: 400;
+  /* prettier-ignore */
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.profile-edit__input:focus {
+  outline: none;
+}

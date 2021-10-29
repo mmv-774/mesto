@@ -1,6 +1,8 @@
 .profile {
   max-width: 880px;
   padding: 40px 0 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: auto;

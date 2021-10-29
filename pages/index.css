@@ -21,3 +21,13 @@
 @import url('../blocks/photo/__like/photo__like.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__btn/popup__btn.css');
+@import url('../blocks/profile-edit/profile-edit.css');
+@import url('../blocks/profile-edit/__title/profile-edit__title.css');
+@import url('../blocks/profile-edit/__fieldset/profile-edit__fieldset.css');
+@import url('../blocks/profile-edit/__fieldset/_type/profile-edit__fieldset_type_input.css');
+@import url('../blocks/profile-edit/__fieldset/_type/profile-edit__fieldset_type_handler.css');
+@import url('../blocks/profile-edit/__input/profile-edit__input.css');
+@import url('../blocks/profile-edit/__handler/profile-edit__handler.css');

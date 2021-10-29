@@ -1,0 +1,17 @@
+.profile-edit {
+  max-width: 358px;
+  width: 100%;
+  padding: 34px 0 37px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: inherit;
+  background-color: inherit;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile-edit {
+    width: calc(238px + (358 - 238) * (100vw - 320px) / (1024 - 320));
+    padding-top: calc(25px + (34 - 25) * (100vw - 320px) / (1024 - 320));
+    padding-bottom: calc(25px + (37 - 25) * (100vw - 320px) / (1024 - 320));
+  }
+}
