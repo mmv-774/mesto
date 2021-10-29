@@ -1,0 +1,13 @@
+.photo__main {
+  width: 100%;
+  height: calc(282 / 361 * 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: fill;
+  -o-object-position: center;
+  object-position: center;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}

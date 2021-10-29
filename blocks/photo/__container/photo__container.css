@@ -1,0 +1,6 @@
+.photo__container {
+  width: 100%;
+  padding-top: calc(361 / 282 * 100%);
+  position: relative;
+  border-radius: inherit;
+}

@@ -1,0 +1,11 @@
+.photo__caption {
+  max-width: calc(199 / 282 * 100%);
+  margin: 0 10px 0 21px;
+  font-size: 24px;
+  font-weight: 900;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: black;
+}

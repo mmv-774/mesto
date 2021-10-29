@@ -1,0 +1,19 @@
+.photo__footer {
+  width: 100%;
+  height: calc(79 / 361 * 100%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
