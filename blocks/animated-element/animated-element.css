@@ -1,0 +1,10 @@
+.animated-element {
+  /* prettier-ignore */
+  transition: opacity .4s ease-in-out;
+}
+
+.animated-element:hover {
+  /* prettier-ignore */
+  opacity: .6;
+  cursor: pointer;
+}
