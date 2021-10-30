@@ -12,3 +12,8 @@
 .profile-edit__input:focus {
   outline: none;
 }
+
+.profile-edit__input::placeholder {
+  /* prettier-ignore */
+  opacity: .5;
+}
