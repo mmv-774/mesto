@@ -1,6 +1,6 @@
 .photo__main {
   width: 100%;
-  min-height: 282px;
+  height: 282px;
   display: block;
   -o-object-fit: fill;
   object-fit: fill;
