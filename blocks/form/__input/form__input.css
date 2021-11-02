@@ -1,4 +1,4 @@
-.profile-edit__input {
+.form__input {
   width: 100%;
   height: 27px;
   padding: 0;
@@ -9,11 +9,11 @@
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
-.profile-edit__input:focus {
+.form__input:focus {
   outline: none;
 }
 
-.profile-edit__input::placeholder {
+.form__input::placeholder {
   /* prettier-ignore */
   opacity: .5;
 }

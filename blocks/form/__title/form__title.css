@@ -1,4 +1,4 @@
-.profile-edit__title {
+.form__title {
   max-width: 100%;
   font-size: 24px;
   font-weight: 900;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .profile-edit__title {
+  .form__title {
     font-size: calc(18px + (24 - 18) * (100vw - 320px) / (1024 - 320));
   }
 }

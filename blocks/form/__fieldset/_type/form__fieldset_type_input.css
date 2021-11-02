@@ -1,4 +1,4 @@
-.profile-edit__fieldset_type_input {
+.form__fieldset_type_input {
   margin: 54px 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .profile-edit__fieldset_type_input {
+  .form__fieldset_type_input {
     margin-top: calc(75px + (54 - 75) * (100vw - 320px) / (1024 - 320));
   }
 }

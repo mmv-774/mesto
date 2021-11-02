@@ -1,4 +1,4 @@
-.profile-edit__handler {
+.form__handler {
   width: 100%;
   height: 50px;
   padding: 0;
@@ -7,10 +7,18 @@
   font-weight: 400;
   background-color: #000;
   color: #fff;
+  /* prettier-ignore */
+  transition: opacity .4s ease-in-out;
+}
+
+.form__handler:hover {
+  /* prettier-ignore */
+  opacity: .8;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
-  .profile-edit__handler {
+  .form__handler {
     font-size: calc(14px + (18 - 14) * (100vw - 320px) / (1024 - 320));
   }
 }

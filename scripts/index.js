@@ -1,15 +1,16 @@
 const profileElement = document.querySelector('.profile');
 const popupElement = document.querySelector('.popup');
 const nameElement = profileElement.querySelector('.profile__title');
-const professionElement = profileElement.querySelector('.profile__subtitle');
+const profElement = profileElement.querySelector('.profile__subtitle');
 const editBtn = profileElement.querySelector('.profile__btn.profile__btn_action_edit');
 const closeBtn = popupElement.querySelector('.popup__btn');
-const formElement = popupElement.querySelector('.profile-edit');
-const inputElements = popupElement.querySelectorAll('.profile-edit__input');
+const formElement = popupElement.querySelector('.form');
+const nameInput = formElement.querySelector('#user-name');
+const profInput = formElement.querySelector('#user-profession');
 
 function popupOpen() {
-  inputElements[0].value = nameElement.textContent;
-  inputElements[1].value = professionElement.textContent;
+  nameInput.value = nameElement.textContent;
+  profInput.value = profElement.textContent;
   popupElement.classList.add('popup_opened');
 }
 
@@ -19,8 +20,8 @@ function popupClose() {
 
 function formSubmit(evt) {
   evt.preventDefault();
-  nameElement.textContent = inputElements[0].value;
-  professionElement.textContent = inputElements[1].value;
+  nameElement.textContent = nameInput.value;
+  profElement.textContent = profInput.value;
   popupClose();
 }
 
