@@ -5,9 +5,10 @@
   box-sizing: border-box;
   display: -ms-grid;
   display: grid;
-  grid-template: auto / repeat(auto-fit, minmax(282px, 1fr));
+  grid-template-columns: repeat(auto-fit, 282px);
   grid-gap: 20px 17px;
   border-radius: 10px;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1024px) {

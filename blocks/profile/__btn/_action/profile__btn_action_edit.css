@@ -1,6 +1,7 @@
 .profile__btn_action_edit {
   width: 24px;
   height: 24px;
+  margin-top: 15px;
   border: 1px solid #fff;
   background-image: url('../../../../images/profile-btn-edit.svg');
   background-size: 10px;
@@ -10,6 +11,7 @@
   .profile__btn_action_edit {
     width: calc(18px + (24 - 18) * (100vw - 320px) / (1024 - 320));
     height: calc(18px + (24 - 18) * (100vw - 320px) / (1024 - 320));
+    margin-top: calc(8px + (15 - 8) * (100vw - 320px) / (1024 - 320));
     background-size: calc(7.5px + (10 - 7.5) * (100vw - 320px) / (1024 - 320));
   }
 }

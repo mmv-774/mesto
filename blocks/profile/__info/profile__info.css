@@ -6,9 +6,6 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 13px 18px;
-  -webkit-box-align: baseline;
-  -ms-flex-align: baseline;
-  align-items: baseline;
 }
 
 @media screen and (max-width: 768px) {

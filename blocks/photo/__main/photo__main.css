@@ -1,10 +1,8 @@
 .photo__main {
   width: 100%;
-  height: calc(282 / 361 * 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  -o-object-fit: cover;
+  min-height: 282px;
+  display: block;
+  -o-object-fit: fill;
   object-fit: fill;
   -o-object-position: center;
   object-position: center;

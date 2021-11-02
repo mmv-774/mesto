@@ -1,9 +1,6 @@
 .photo__footer {
   width: 100%;
-  min-height: calc(79 / 361 * 100%);
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  min-height: 79px;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   background-color: #fff;
