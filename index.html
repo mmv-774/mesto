@@ -33,10 +33,10 @@
     <footer class="footer horizontal-aligned-block">
       <p class="footer__copyright">&copy;&nbsp;2021. Мезенцев Михаил</p>
     </footer>
-    <div class="popup">
+    <div id="profile-edit" class="popup">
       <div class="popup__container">
         <button type="button" class="popup__btn animated-element"></button>
-        <form name="profile-edit" class="form">
+        <form name="edit" class="form">
           <h2 class="form__title">Редактировать профиль</h2>
           <fieldset class="form__fieldset form__fieldset_type_input">
             <input
@@ -58,6 +58,35 @@
           </fieldset>
           <fieldset class="form__fieldset form__fieldset_type_handler">
             <button type="submit" class="form__handler">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div id="card-add" class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__btn animated-element"></button>
+        <form name="add" class="form">
+          <h2 class="form__title">Новое место</h2>
+          <fieldset class="form__fieldset form__fieldset_type_input">
+            <input
+              type="text"
+              required
+              id="card-name"
+              name="card-name"
+              placeholder="Название"
+              class="form__input"
+            />
+            <input
+              type="url"
+              required
+              id="card-link"
+              name="card-link"
+              placeholder="Ссылка на картинку"
+              class="form__input"
+            />
+          </fieldset>
+          <fieldset class="form__fieldset form__fieldset_type_handler">
+            <button type="submit" class="form__handler">Создать</button>
           </fieldset>
         </form>
       </div>

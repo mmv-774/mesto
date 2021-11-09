@@ -1,14 +1,21 @@
-const profileElement = document.querySelector('.profile');
-const popupElement = document.querySelector('.popup');
-const nameElement = profileElement.querySelector('.profile__title');
-const profElement = profileElement.querySelector('.profile__subtitle');
-const editBtn = profileElement.querySelector('.profile__btn.profile__btn_action_edit');
-const closeBtn = popupElement.querySelector('.popup__btn');
-const formElement = popupElement.querySelector('.form');
-const nameInput = formElement.querySelector('#user-name');
-const profInput = formElement.querySelector('#user-profession');
-const cardsElement = document.querySelector('.cards');
+const profileName = document.querySelector('.profile .profile__title');
+const profileProfession = document.querySelector('.profile .profile__subtitle');
+const profileEditBtn = document.querySelector('.profile .profile__btn.profile__btn_action_edit');
+const profilePopup = document.querySelector('#profile-edit');
+const profileCloseBtn = profilePopup.querySelector('.popup__btn');
+const profileEditForm = profilePopup.querySelector('.form');
+const profileNewName = profileEditForm.querySelector('#user-name');
+const profileNewProfession = profileEditForm.querySelector('#user-profession');
+
 const cardTemplate = document.querySelector('#card').content;
+const cardAddBtn = document.querySelector('.profile .profile__btn.profile__btn_action_add');
+const cardPopup = document.querySelector('#card-add');
+const cardCloseBtn = cardPopup.querySelector('.popup__btn');
+const cardAddForm = cardPopup.querySelector('.form');
+const cardNewName = cardAddForm.querySelector('#card-name');
+const cardNewLink = cardAddForm.querySelector('#card-link');
+const cardElement = cardTemplate.querySelector('.card');
+const cardsElement = document.querySelector('.cards');
 const cards = [
   {
     name: 'Архыз',
@@ -36,33 +43,60 @@ const cards = [
   },
 ];
 
-cards.forEach(card => addCard(card.name, card.link));
+cards.forEach((card) => cardsElement.append(cardCreate(card.name, card.link)));
 
-function addCard(name, link) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  cardElement.querySelector('.card__photo').src = link;
-  cardElement.querySelector('.card__photo').alt = name;
-  cardElement.querySelector('.card__title').textContent = name;
-  cardsElement.append(cardElement);
+function popupOpen(popup) {
+  popup.classList.add('popup_opened');
 }
 
-function popupOpen() {
-  nameInput.value = nameElement.textContent;
-  profInput.value = profElement.textContent;
-  popupElement.classList.add('popup_opened');
+function popupClose(popup) {
+  popup.classList.remove('popup_opened');
 }
 
-function popupClose() {
-  popupElement.classList.remove('popup_opened');
+function profileFormOpen() {
+  profileNewName.value = profileName.textContent;
+  profileNewProfession.value = profileProfession.textContent;
+  popupOpen(profilePopup);
 }
 
-function formSubmit(evt) {
+function profileFormClose() {
+  popupClose(profilePopup);
+  profileEditForm.reset();
+}
+
+function profileFormSave(evt) {
   evt.preventDefault();
-  nameElement.textContent = nameInput.value;
-  profElement.textContent = profInput.value;
-  popupClose();
+  profileName.textContent = profileNewName.value;
+  profileProfession.textContent = profileNewProfession.value;
+  profileFormClose();
 }
 
-editBtn.addEventListener('click', popupOpen);
-closeBtn.addEventListener('click', popupClose);
-formElement.addEventListener('submit', formSubmit);
+function cardFormOpen() {
+  popupOpen(cardPopup);
+}
+
+function cardFormClose() {
+  popupClose(cardPopup);
+  cardAddForm.reset();
+}
+
+function cardFormSave(evt) {
+  evt.preventDefault();
+  cardsElement.prepend(cardCreate(cardNewName.value, cardNewLink.value));
+  cardFormClose();
+}
+
+function cardCreate(name, link) {
+  const newCard = cardElement.cloneNode(true);
+  newCard.querySelector('.card__photo').src = link;
+  newCard.querySelector('.card__photo').alt = name;
+  newCard.querySelector('.card__title').textContent = name;
+  return newCard;
+}
+
+profileEditBtn.addEventListener('click', profileFormOpen);
+profileCloseBtn.addEventListener('click', profileFormClose);
+profileEditForm.addEventListener('submit', profileFormSave);
+cardAddBtn.addEventListener('click', cardFormOpen);
+cardCloseBtn.addEventListener('click', cardFormClose);
+cardAddForm.addEventListener('submit', cardFormSave);
