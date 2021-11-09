@@ -1,4 +1,4 @@
-.photo__caption {
+.card__title {
   max-width: calc(199 / 282 * 100%);
   margin: 0 10px 0 21px;
   font-size: 24px;

@@ -1,4 +1,4 @@
-.photo__like {
+.card__like {
   width: 22px;
   height: 19px;
   margin-right: 30px;
@@ -14,7 +14,7 @@
   transition: opacity .4s ease-in-out;
 }
 
-.photo__like:hover {
+.card__like:hover {
   /* prettier-ignore */
   opacity: .5;
   cursor: pointer;

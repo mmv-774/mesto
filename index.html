@@ -28,50 +28,7 @@
           class="profile__btn profile__btn_action_add animated-element"
         ></button>
       </section>
-      <section class="photo-grid horizontal-aligned-block">
-        <div class="photo">
-          <img src="./images/baikal.jpg" alt="Озеро Байкал." class="photo__main" />
-          <div class="photo__footer">
-            <h3 class="photo__caption">Озеро Байкал</h3>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </div>
-        <div class="photo">
-          <img src="./images/altai.jpg" alt="Алтай." class="photo__main" />
-          <div class="photo__footer">
-            <h3 class="photo__caption">Алтай</h3>
-            <button type="button" class="photo__like photo__like_active"></button>
-          </div>
-        </div>
-        <div class="photo">
-          <img src="./images/dombay.jpg" alt="Домбай." class="photo__main" />
-          <div class="photo__footer">
-            <h3 class="photo__caption">Домбай</h3>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </div>
-        <div class="photo">
-          <img src="./images/kamchatka.jpg" alt="Камчатка." class="photo__main" />
-          <div class="photo__footer">
-            <h3 class="photo__caption">Камчатка</h3>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </div>
-        <div class="photo">
-          <img src="./images/nurgush.jpg" alt="Хребет Нургуш." class="photo__main" />
-          <div class="photo__footer">
-            <h3 class="photo__caption">Хребет Нургуш</h3>
-            <button type="button" class="photo__like photo__like_active"></button>
-          </div>
-        </div>
-        <div class="photo">
-          <img src="./images/osetia.jpg" alt="Осетия." class="photo__main" />
-            <div class="photo__footer">
-              <h3 class="photo__caption">Осетия</h3>
-              <button type="button" class="photo__like"></button>
-            </div>
-        </div>
-      </section>
+      <section class="cards horizontal-aligned-block"></section>
     </main>
     <footer class="footer horizontal-aligned-block">
       <p class="footer__copyright">&copy;&nbsp;2021. Мезенцев Михаил</p>
@@ -105,6 +62,15 @@
         </form>
       </div>
     </div>
+    <template id="card">
+      <article class="card">
+        <img class="card__photo" />
+        <div class="card__description">
+          <h3 class="card__title"></h3>
+          <button type="button" class="card__like"></button>
+        </div>
+      </article>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
