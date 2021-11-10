@@ -28,7 +28,7 @@
           class="profile__btn profile__btn_action_add animated-element"
         ></button>
       </section>
-      <section class="cards horizontal-aligned-block"></section>
+      <div class="cards horizontal-aligned-block"></div>
     </main>
     <footer class="footer horizontal-aligned-block">
       <p class="footer__copyright">&copy;&nbsp;2021. Мезенцев Михаил</p>
@@ -94,9 +94,10 @@
     <template id="card">
       <article class="card">
         <img class="card__photo" />
+        <button type="button" class="card__btn card__btn_action_delete"></button>
         <div class="card__description">
           <h3 class="card__title"></h3>
-          <button type="button" class="card__like"></button>
+          <button type="button" class="card__btn card__btn_action_like"></button>
         </div>
       </article>
     </template>

@@ -6,7 +6,6 @@ const profileCloseBtn = profilePopup.querySelector('.popup__btn');
 const profileEditForm = profilePopup.querySelector('.form');
 const profileNewName = profileEditForm.querySelector('#user-name');
 const profileNewProfession = profileEditForm.querySelector('#user-profession');
-
 const cardTemplate = document.querySelector('#card').content;
 const cardAddBtn = document.querySelector('.profile .profile__btn.profile__btn_action_add');
 const cardPopup = document.querySelector('#card-add');
@@ -33,7 +32,9 @@ function openProfileForm() {
 
 function closeProfileForm() {
   closePopup(profilePopup);
-  setTimeout(() => {profileEditForm.reset()}, parseFloat(window.getComputedStyle(profilePopup, null).transitionDuration) * 1000);
+  setTimeout(() => {
+    profileEditForm.reset();
+  }, parseFloat(window.getComputedStyle(profilePopup, null).transitionDuration) * 1000);
 }
 
 function saveProfileForm(evt) {
@@ -49,7 +50,9 @@ function openCardForm() {
 
 function closeCardForm() {
   closePopup(cardPopup);
-  setTimeout(() => {cardAddForm.reset()}, parseFloat(window.getComputedStyle(cardPopup, null).transitionDuration) * 1000);
+  setTimeout(() => {
+    cardAddForm.reset();
+  }, parseFloat(window.getComputedStyle(cardPopup, null).transitionDuration) * 1000);
 }
 
 function saveCardForm(evt) {
@@ -62,11 +65,11 @@ function createCard(name, link) {
   const card = cardElement.cloneNode(true);
   const photo = card.querySelector('.card__photo');
   const title = card.querySelector('.card__title');
-  const like = card.querySelector('.card__like');
+  const like = card.querySelector('.card__btn_action_like');
   photo.src = link;
   photo.alt = name;
   title.textContent = name;
-  like.addEventListener('click', evt => evt.target.classList.toggle('card__like_active'));
+  like.addEventListener('click', (evt) => evt.target.classList.toggle('card__btn_active_like'));
   return card;
 }
 
@@ -100,7 +103,7 @@ function initCards() {
   cards.forEach((card) => cardsElement.append(createCard(card.name, card.link)));
 }
 
-document.addEventListener('DOMContentLoaded', initCards)
+document.addEventListener('DOMContentLoaded', initCards);
 profileEditBtn.addEventListener('click', openProfileForm);
 profileCloseBtn.addEventListener('click', closeProfileForm);
 profileEditForm.addEventListener('submit', saveProfileForm);
