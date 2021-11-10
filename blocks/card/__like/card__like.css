@@ -10,12 +10,10 @@
   background-position: center;
   border: none;
   background-color: transparent;
-  /* prettier-ignore */
-  transition: opacity .4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .card__like:hover {
-  /* prettier-ignore */
-  opacity: .5;
+  opacity: 0.5;
   cursor: pointer;
 }

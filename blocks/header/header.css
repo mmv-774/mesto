@@ -3,8 +3,7 @@
   padding: 45px 0 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  /* prettier-ignore */
-  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (max-width: 1024px) {

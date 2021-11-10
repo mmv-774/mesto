@@ -16,87 +16,94 @@ const cardNewName = cardAddForm.querySelector('#card-name');
 const cardNewLink = cardAddForm.querySelector('#card-link');
 const cardElement = cardTemplate.querySelector('.card');
 const cardsElement = document.querySelector('.cards');
-const cards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
 
-cards.forEach((card) => cardsElement.append(cardCreate(card.name, card.link)));
-
-function popupOpen(popup) {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function popupClose(popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function profileFormOpen() {
+function openProfileForm() {
   profileNewName.value = profileName.textContent;
   profileNewProfession.value = profileProfession.textContent;
-  popupOpen(profilePopup);
+  openPopup(profilePopup);
 }
 
-function profileFormClose() {
-  popupClose(profilePopup);
-  profileEditForm.reset();
+function closeProfileForm() {
+  closePopup(profilePopup);
+  setTimeout(() => {profileEditForm.reset()}, parseFloat(window.getComputedStyle(profilePopup, null).transitionDuration) * 1000);
 }
 
-function profileFormSave(evt) {
+function saveProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = profileNewName.value;
   profileProfession.textContent = profileNewProfession.value;
-  profileFormClose();
+  closeProfileForm();
 }
 
-function cardFormOpen() {
-  popupOpen(cardPopup);
+function openCardForm() {
+  openPopup(cardPopup);
 }
 
-function cardFormClose() {
-  popupClose(cardPopup);
-  cardAddForm.reset();
+function closeCardForm() {
+  closePopup(cardPopup);
+  setTimeout(() => {cardAddForm.reset()}, parseFloat(window.getComputedStyle(cardPopup, null).transitionDuration) * 1000);
 }
 
-function cardFormSave(evt) {
+function saveCardForm(evt) {
   evt.preventDefault();
-  cardsElement.prepend(cardCreate(cardNewName.value, cardNewLink.value));
-  cardFormClose();
+  cardsElement.prepend(createCard(cardNewName.value, cardNewLink.value));
+  closeCardForm();
 }
 
-function cardCreate(name, link) {
-  const newCard = cardElement.cloneNode(true);
-  newCard.querySelector('.card__photo').src = link;
-  newCard.querySelector('.card__photo').alt = name;
-  newCard.querySelector('.card__title').textContent = name;
-  return newCard;
+function createCard(name, link) {
+  const card = cardElement.cloneNode(true);
+  const photo = card.querySelector('.card__photo');
+  const title = card.querySelector('.card__title');
+  const like = card.querySelector('.card__like');
+  photo.src = link;
+  photo.alt = name;
+  title.textContent = name;
+  like.addEventListener('click', evt => evt.target.classList.toggle('card__like_active'));
+  return card;
 }
 
-profileEditBtn.addEventListener('click', profileFormOpen);
-profileCloseBtn.addEventListener('click', profileFormClose);
-profileEditForm.addEventListener('submit', profileFormSave);
-cardAddBtn.addEventListener('click', cardFormOpen);
-cardCloseBtn.addEventListener('click', cardFormClose);
-cardAddForm.addEventListener('submit', cardFormSave);
+function initCards() {
+  const cards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+    },
+  ];
+  cards.forEach((card) => cardsElement.append(createCard(card.name, card.link)));
+}
+
+document.addEventListener('DOMContentLoaded', initCards)
+profileEditBtn.addEventListener('click', openProfileForm);
+profileCloseBtn.addEventListener('click', closeProfileForm);
+profileEditForm.addEventListener('submit', saveProfileForm);
+cardAddBtn.addEventListener('click', openCardForm);
+cardCloseBtn.addEventListener('click', closeCardForm);
+cardAddForm.addEventListener('submit', saveCardForm);
