@@ -65,11 +65,13 @@ function createCard(name, link) {
   const card = cardElement.cloneNode(true);
   const photo = card.querySelector('.card__photo');
   const title = card.querySelector('.card__title');
-  const like = card.querySelector('.card__btn_action_like');
+  const likeBtn = card.querySelector('.card__btn_action_like');
+  const deleteBtn = card.querySelector('.card__btn_action_delete');
   photo.src = link;
   photo.alt = name;
   title.textContent = name;
-  like.addEventListener('click', (evt) => evt.target.classList.toggle('card__btn_active_like'));
+  likeBtn.addEventListener('click', (evt) => evt.target.classList.toggle('card__btn_active_like'));
+  deleteBtn.addEventListener('click', (evt) => evt.target.closest('.card').remove());
   return card;
 }
 
