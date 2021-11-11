@@ -1,0 +1,25 @@
+.photo__btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  position: absolute;
+  left: calc(100% + 8px);
+  bottom: calc(100% + 8px);
+  background-image: url('../../../images/popup-btn-close.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  background-size: 100%;
+  border: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .photo__btn {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    bottom: calc(100% + 16px);
+    width: calc(20px + (32 - 20) * (100vw - 320px) / (1024 - 320));
+    height: calc(20px + (32 - 20) * (100vw - 320px) / (1024 - 320));
+  }
+}

@@ -36,3 +36,8 @@
 @import url('../blocks/form/__fieldset/_type/form__fieldset_type_handler.css');
 @import url('../blocks/form/__input/form__input.css');
 @import url('../blocks/form/__handler/form__handler.css');
+@import url('../blocks/photo/photo.css');
+@import url('../blocks/photo/__figure/photo__figure.css');
+@import url('../blocks/photo/__btn/photo__btn.css');
+@import url('../blocks/photo/__img/photo__img.css');
+@import url('../blocks/photo/__caption/photo__caption.css');
