@@ -18,7 +18,7 @@ const cardsElement = document.querySelector('.cards');
 const photoPopup = document.querySelector('#photo-popup');
 const photoPopupImg = photoPopup.querySelector('.photo__img');
 const photoPopupCaption = photoPopup.querySelector('.photo__caption');
-const photoCloseBtn = photoPopup.querySelector('.photo__btn');
+const photoCloseBtn = photoPopup.querySelector('.popup__btn');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -36,9 +36,6 @@ function openProfilePopup() {
 
 function closeProfilePopup() {
   closePopup(profilePopup);
-  setTimeout(() => {
-    profileEditForm.reset();
-  }, parseFloat(window.getComputedStyle(profilePopup, null).transitionDuration) * 1000);
 }
 
 function saveProfileInfo(evt) {
@@ -54,9 +51,6 @@ function openCardPopup() {
 
 function closeCardPopup() {
   closePopup(cardPopup);
-  setTimeout(() => {
-    cardAddForm.reset();
-  }, parseFloat(window.getComputedStyle(cardPopup, null).transitionDuration) * 1000);
 }
 
 function toggleCardLike(evt) {
@@ -67,6 +61,10 @@ function addNewCard(evt) {
   evt.preventDefault();
   cardsElement.prepend(createCard(cardNewName.value, cardNewLink.value));
   closeCardPopup();
+  setTimeout(
+    () => cardAddForm.reset(),
+    parseFloat(window.getComputedStyle(cardPopup, null).transitionDuration) * 1000
+  );
 }
 
 function removeCard(evt) {
@@ -82,10 +80,6 @@ function openPhotoPopup(evt) {
 
 function closePhotoPopup() {
   closePopup(photoPopup);
-  setTimeout(() => {
-    photoPopupImg.src = '#';
-    photoPopupImg.alt = '';
-  }, parseFloat(window.getComputedStyle(photoPopup, null).transitionDuration) * 1000);
 }
 
 function createCard(name, link) {
