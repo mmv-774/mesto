@@ -34,8 +34,13 @@
 @import url('../blocks/form/__fieldset/form__fieldset.css');
 @import url('../blocks/form/__fieldset/_type/form__fieldset_type_input.css');
 @import url('../blocks/form/__fieldset/_type/form__fieldset_type_handler.css');
+@import url('../blocks/form/__label/form__label.css');
 @import url('../blocks/form/__input/form__input.css');
+@import url('../blocks/form/__input/_type/form__input_type_error.css');
+@import url('../blocks/form/__input-error/form__input-error.css');
+@import url('../blocks/form/__input-error/_active/form__input-error_active.css');
 @import url('../blocks/form/__handler/form__handler.css');
+@import url('../blocks/form/__handler/_disabled/form__handler_disabled.css');
 @import url('../blocks/photo/photo.css');
 @import url('../blocks/photo/__figure/photo__figure.css');
 @import url('../blocks/photo/__img/photo__img.css');
