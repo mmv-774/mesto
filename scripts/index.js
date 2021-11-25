@@ -22,9 +22,27 @@ const photoPopupCaption = photoPopup.querySelector('.photo__caption');
 const photoCloseBtn = photoPopup.querySelector('.popup__btn');
 //#endregion
 
-const openPopup = (popup) => popup.classList.add('popup_opened');
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
+};
 
-const closePopup = (popup) => popup.classList.remove('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
+};
+
+const closePopupByEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+};
+
+const closePopupByOverlayClick = (evt) => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+};
 
 const openProfilePopup = () => {
   profileNewName.value = profileName.textContent;
@@ -32,25 +50,19 @@ const openProfilePopup = () => {
   openPopup(profilePopup);
 };
 
-const closeProfilePopup = () => closePopup(profilePopup);
-
 const saveProfileInfo = (evt) => {
   evt.preventDefault();
   profileName.textContent = profileNewName.value;
   profileProfession.textContent = profileNewProfession.value;
-  closeProfilePopup();
+  closePopup(profilePopup);
 };
-
-const openCardPopup = () => openPopup(cardPopup);
-
-const closeCardPopup = () => closePopup(cardPopup);
 
 const toggleCardLike = (evt) => evt.target.classList.toggle('card__btn_active_like');
 
 const addNewCard = (evt) => {
   evt.preventDefault();
   cardsElement.prepend(createCard(cardNewName.value, cardNewLink.value));
-  closeCardPopup();
+  closePopup(cardPopup);
   setTimeout(
     () => cardAddForm.reset(),
     parseFloat(window.getComputedStyle(cardPopup, null).transitionDuration) * 1000
@@ -65,8 +77,6 @@ const openPhotoPopup = (evt) => {
   photoPopupCaption.textContent = evt.target.alt;
   openPopup(photoPopup);
 };
-
-const closePhotoPopup = () => closePopup(photoPopup);
 
 const createCard = (name, link) => {
   const card = cardElement.cloneNode(true);
@@ -113,25 +123,24 @@ const initCards = () => {
   cards.forEach((card) => cardsElement.append(createCard(card.name, card.link)));
 };
 
-const setPopupEventListeners = () => {
+const setPopupsEventListeners = () => {
   const popups = Array.from(document.querySelectorAll('.popup'));
   popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup')) {
-        closePopup(popup);
-      }
+      closePopupByOverlayClick(evt);
     });
   });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   initCards();
-  setPopupEventListeners();
+  setPopupsEventListeners();
 });
+
 profileEditBtn.addEventListener('click', openProfilePopup);
-profileCloseBtn.addEventListener('click', closeProfilePopup);
+profileCloseBtn.addEventListener('click', () => closePopup(profilePopup));
 profileEditForm.addEventListener('submit', saveProfileInfo);
-cardAddBtn.addEventListener('click', openCardPopup);
-cardCloseBtn.addEventListener('click', closeCardPopup);
+cardAddBtn.addEventListener('click', () => openPopup(cardPopup));
+cardCloseBtn.addEventListener('click', () => closePopup(cardPopup));
 cardAddForm.addEventListener('submit', addNewCard);
-photoCloseBtn.addEventListener('click', closePhotoPopup);
+photoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
