@@ -47,6 +47,7 @@ const closePopupByOverlayClick = (evt) => {
 const openProfilePopup = () => {
   profileNewName.value = profileName.textContent;
   profileNewProfession.value = profileProfession.textContent;
+  refreshFormElementState(profileEditForm);
   openPopup(profilePopup);
 };
 
@@ -125,11 +126,9 @@ const initCards = () => {
 
 const setPopupsEventListeners = () => {
   const popups = Array.from(document.querySelectorAll('.popup'));
-  popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
-      closePopupByOverlayClick(evt);
-    });
-  });
+  popups.forEach((popup) =>
+    popup.addEventListener('click', (evt) => closePopupByOverlayClick(evt))
+  );
 };
 
 document.addEventListener('DOMContentLoaded', () => {
