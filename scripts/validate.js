@@ -72,19 +72,17 @@ const enableValidation = (validationConfig) => {
   setConfig(validationConfig);
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', () => e.preventDefault());
+    formElement.addEventListener('submit', (e) => e.preventDefault());
     setFormElementState(formElement);
   });
 };
 
-document.addEventListener('DOMContentLoaded', () =>
-  enableValidation({
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__handler',
-    inactiveButtonClass: 'form__handler_disabled',
-    inputErrorClass: 'form__input_type_error',
-    activeErrorClass: 'form__input-error_active',
-    errorSelectorPostfix: 'input-error',
-  })
-);
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__handler',
+  inactiveButtonClass: 'form__handler_disabled',
+  inputErrorClass: 'form__input_type_error',
+  activeErrorClass: 'form__input-error_active',
+  errorSelectorPostfix: 'input-error',
+});
