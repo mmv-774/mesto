@@ -1,6 +1,7 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
-//#region elements declaration
+//#region declaration
 const profileName = document.querySelector('.profile__title');
 const profileProfession = document.querySelector('.profile__subtitle');
 const profileEditBtn = document.querySelector('.profile__btn_action_edit');
@@ -18,6 +19,41 @@ const cardNewLink = cardAddForm.querySelector('.card-link-input');
 const cardsElement = document.querySelector('.cards');
 const photoPopup = document.querySelector('.photo-popup');
 const photoCloseBtn = photoPopup.querySelector('.photo-popup .popup__btn');
+const validatorConfig = {
+  formOpenButton: '',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__handler',
+  inactiveButtonClass: 'form__handler_disabled',
+  inputErrorClass: 'form__input_type_error',
+  activeErrorClass: 'form__input-error_active',
+  errorSelectorPostfix: 'input-error',
+};
+const cards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+  },
+];
 //#endregion
 
 const openPopup = (popup) => {
@@ -45,7 +81,6 @@ const closePopupByOverlayClick = (evt) => {
 const openProfilePopup = () => {
   profileNewName.value = profileName.textContent;
   profileNewProfession.value = profileProfession.textContent;
-  refreshFormElementState(profileEditForm);
   openPopup(profilePopup);
 };
 
@@ -62,13 +97,26 @@ const addNewCard = (evt) => {
     name: cardNewName.value,
     link: cardNewLink.value,
   };
-  cardsElement.prepend(new Card(card, '.card-template').create());
+  cardsElement.prepend(new Card({ ...card, openPopup: openPopup }, '.card-template').create());
   closePopup(cardPopup);
   cardAddForm.reset();
 };
 
 const initCards = (cards) => {
-  cards.forEach((card) => cardsElement.append(new Card(card, '.card-template').create()));
+  cards.forEach((card) =>
+    cardsElement.append(new Card({ ...card, openPopup: openPopup }, '.card-template').create())
+  );
+};
+
+const setFormValidators = () => {
+  new FormValidator(
+    { ...validatorConfig, formOpenButton: '.profile__btn_action_edit' },
+    profileEditForm
+  ).enableValidation();
+  new FormValidator(
+    { ...validatorConfig, formOpenButton: '.profile__btn_action_add' },
+    cardAddForm
+  ).enableValidation();
 };
 
 const setPopupsEventListeners = () => {
@@ -86,38 +134,6 @@ cardCloseBtn.addEventListener('click', () => closePopup(cardPopup));
 cardAddForm.addEventListener('submit', addNewCard);
 photoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
 
-const cards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    openPopup: openPopup,
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    openPopup: openPopup,
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    openPopup: openPopup,
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    openPopup: openPopup,
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    openPopup: openPopup,
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    openPopup: openPopup,
-  },
-];
-
 initCards(cards);
+setFormValidators();
 setPopupsEventListeners();

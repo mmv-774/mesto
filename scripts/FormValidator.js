@@ -13,7 +13,9 @@ class FormValidator {
   }
 
   _hasInvalidInput() {
-    this._formElementComposition.inputElements.some((inputElement) => !inputElement.validity.valid);
+    return this._formElementComposition.inputElements.some(
+      (inputElement) => !inputElement.validity.valid
+    );
   }
 
   _toggleButtonState() {
@@ -38,7 +40,6 @@ class FormValidator {
     const errorElement = this._formElement.querySelector(
       `.${inputElement.id}-${this._config.errorSelectorPostfix}`
     );
-    console.log(inputElement.id);
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.classList.remove(this._config.activeErrorClass);
     errorElement.textContent = '';
@@ -50,6 +51,17 @@ class FormValidator {
       : this._showInputError(inputElement, inputElement.validationMessage);
   }
 
+  _refreshFormElementState() {
+    this._formElementComposition.inputElements.forEach((inputElement) =>
+      inputElement.dispatchEvent(new Event('input'))
+    );
+    this._formElementComposition.inputElements.forEach((inputElement) => {
+      if (inputElement.value === '') {
+        this._hideInputError(inputElement);
+      }
+    });
+  }
+
   _setFormElementState() {
     this._toggleButtonState();
     this._formElementComposition.inputElements.forEach((inputElement) => {
@@ -58,16 +70,10 @@ class FormValidator {
         this._toggleButtonState();
       });
     });
-  }
 
-  _refreshFormElementState() {
-    this._formElementComposition.inputElements.forEach((inputElement) =>
-      inputElement.dispatchEvent(new Event('input'))
-    );
-  }
-
-  refreshValidation() {
-    this._refreshFormElementState();
+    document
+      .querySelector(this._config.formOpenButton)
+      .addEventListener('click', () => this._refreshFormElementState());
   }
 
   enableValidation() {
