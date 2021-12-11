@@ -70,10 +70,10 @@ class FormValidator {
         this._toggleButtonState();
       });
     });
+  }
 
-    document
-      .querySelector(this._config.formOpenButton)
-      .addEventListener('click', () => this._refreshFormElementState());
+  resetValidation() {
+    this._refreshFormElementState();
   }
 
   enableValidation() {
