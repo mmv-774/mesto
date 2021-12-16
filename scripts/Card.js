@@ -34,7 +34,7 @@ class Card {
 
   _setEventListeners() {
     this._card.photo.addEventListener('click', (evt) =>
-      this._handleCardClick(evt.target.alt, evt.target.src)
+      this._handleCardClick(evt.target.src, evt.target.alt)
     );
     this._card.likeButton.addEventListener('click', (evt) => this._toggleLike(evt));
     this._card.deleteButton.addEventListener('click', (evt) => this._remove(evt));
