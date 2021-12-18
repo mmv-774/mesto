@@ -1,3 +1,4 @@
+import FormValidator from './FormValidator.js';
 import Popup from './Popup.js';
 
 class PopupWithForm extends Popup {
@@ -35,6 +36,18 @@ class PopupWithForm extends Popup {
   _setEventListeners() {
     this._composition.form.addEventListener('submit', (evt) => this._handleFormSubmit(evt));
     super._setEventListeners();
+  }
+
+  enableFormValidation(config) {
+    this._formValidator = new FormValidator(config, this._composition.form);
+    this._formValidator.enableValidation();
+  }
+
+  open() {
+    if (this._formValidator) {
+      this._formValidator.resetValidation();
+    }
+    super.open();
   }
 
   close() {
