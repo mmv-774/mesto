@@ -2,15 +2,22 @@ import FormValidator from './FormValidator.js';
 import Popup from './Popup.js';
 
 class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
+  constructor(popupSelector, handleFormSubmit, formValidatorConfig) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
+    this._formValidator = new FormValidator(formValidatorConfig, this._composition.form);
+    this._formValidator.enableValidation();
   }
 
   _getComposition() {
     return {
       form: this._element.querySelector('.form'),
     };
+  }
+
+  _setEventListeners() {
+    this._composition.form.addEventListener('submit', (evt) => this._handleFormSubmit(evt));
+    super._setEventListeners();
   }
 
   getInputElement(inputElementSelector) {
@@ -33,20 +40,8 @@ class PopupWithForm extends Popup {
     });
   }
 
-  _setEventListeners() {
-    this._composition.form.addEventListener('submit', (evt) => this._handleFormSubmit(evt));
-    super._setEventListeners();
-  }
-
-  enableFormValidation(config) {
-    this._formValidator = new FormValidator(config, this._composition.form);
-    this._formValidator.enableValidation();
-  }
-
   open() {
-    if (this._formValidator) {
-      this._formValidator.resetValidation();
-    }
+    this._formValidator.resetValidation();
     super.open();
   }
 
