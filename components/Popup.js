@@ -1,8 +1,11 @@
+import { getElement } from '../utils/utils.js';
+import { popupOpenClass, popupCloseButtonClass } from '../utils/constants.js';
+
 class Popup {
   constructor(popupSelector) {
     this._close = this._close.bind(this);
     this._closeByEsc = this._closeByEsc.bind(this);
-    this._element = document.querySelector(popupSelector);
+    this._element = getElement(popupSelector);
     this._composition = this._getComposition();
     this._setEventListeners();
   }
@@ -12,10 +15,10 @@ class Popup {
   }
 
   _close(evt) {
-    if (evt.target.classList.contains('popup_opened')) {
+    if (evt.target.classList.contains(popupOpenClass)) {
       this.close();
     }
-    if (evt.target.classList.contains('popup__close')) {
+    if (evt.target.classList.contains(popupCloseButtonClass)) {
       this.close();
     }
   }
@@ -31,12 +34,12 @@ class Popup {
   }
 
   open() {
-    this._element.classList.add('popup_opened');
+    this._element.classList.add(popupOpenClass);
     document.addEventListener('keydown', this._closeByEsc);
   }
 
   close() {
-    this._element.classList.remove('popup_opened');
+    this._element.classList.remove(popupOpenClass);
     document.removeEventListener('keydown', this._closeByEsc);
   }
 }

@@ -1,4 +1,6 @@
 import Popup from './Popup.js';
+import { getElement } from '../utils/utils.js';
+import { photoComponentSelectors } from '../utils/constants.js';
 
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
@@ -7,8 +9,8 @@ class PopupWithImage extends Popup {
 
   _getComposition() {
     return {
-      image: this._element.querySelector('.photo__img'),
-      caption: this._element.querySelector('.photo__caption'),
+      image: getElement(photoComponentSelectors.image, this._element),
+      caption: getElement(photoComponentSelectors.caption, this._element),
     };
   }
 

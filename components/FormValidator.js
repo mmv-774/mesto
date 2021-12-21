@@ -1,3 +1,5 @@
+import { getElement, getElements } from '../utils/utils.js';
+
 class FormValidator {
   constructor(config, formElement) {
     this._config = config;
@@ -7,39 +9,31 @@ class FormValidator {
 
   _getFormComposition() {
     return {
-      inputElements: Array.from(this._formElement.querySelectorAll(this._config.inputSelector)),
-      submitButton: this._formElement.querySelector(this._config.submitButtonSelector),
+      inputElements: getElements(this._config.inputSelector, this._formElement),
+      submitButton: getElement(this._config.submitButtonSelector, this._formElement),
     };
   }
 
   _hasInvalidInput() {
-    return this._formElementComposition.inputElements.some(
-      (inputElement) => !inputElement.validity.valid
-    );
+    return this._formElementComposition.inputElements.some((inputElement) => !inputElement.validity.valid);
   }
 
   _toggleButtonState() {
     this._formElementComposition.submitButton.disabled = this._hasInvalidInput();
     this._formElementComposition.submitButton.disabled
       ? this._formElementComposition.submitButton.classList.add(this._config.inactiveButtonClass)
-      : this._formElementComposition.submitButton.classList.remove(
-          this._config.inactiveButtonClass
-        );
+      : this._formElementComposition.submitButton.classList.remove(this._config.inactiveButtonClass);
   }
 
   _showInputError = (inputElement, errorMessage) => {
-    const errorElement = this._formElement.querySelector(
-      `.${inputElement.id}-${this._config.errorSelectorPostfix}`
-    );
+    const errorElement = getElement(`.${inputElement.id}-${this._config.errorSelectorPostfix}`, this._formElement);
     inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._config.activeErrorClass);
   };
 
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(
-      `.${inputElement.id}-${this._config.errorSelectorPostfix}`
-    );
+    const errorElement = getElement(`.${inputElement.id}-${this._config.errorSelectorPostfix}`, this._formElement);
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.classList.remove(this._config.activeErrorClass);
     errorElement.textContent = '';
