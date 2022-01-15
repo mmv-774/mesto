@@ -4,12 +4,20 @@ class Api {
     this._headers = options.headers;
   }
 
-  async _sendRequest(path, options) {
-    const res = await fetch(`${this._baseUrl}${path}`, options);
-    if (res.ok) {
-      return res.json();
-    }
-    return await Promise.reject(`Ошибка: ${res.status}`);
+  _sendRequest(path, options) {
+    return fetch(`${this._baseUrl}${path}`, options).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  getUserInfo() {
+    return this._sendRequest('users/me', {
+      headers: this._headers,
+    });
   }
 }
 

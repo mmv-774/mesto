@@ -1,4 +1,5 @@
 import './index.css';
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -6,6 +7,7 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { getElement } from '../utils/utils.js';
 import {
+  apiOptions,
   popupElementSelectors,
   profileComponentSelectors,
   cards,
@@ -16,16 +18,22 @@ import {
 } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 
+const api = new Api(apiOptions);
 const profilePopup = new PopupWithForm(popupElementSelectors.profile, handleProfileFormSubmit, createFormValidator);
 const cardPopup = new PopupWithForm(popupElementSelectors.card, handleCardFormSubmit, createFormValidator);
 const photoPopup = new PopupWithImage(popupElementSelectors.photo);
-const userInfo = new UserInfo(profileComponentSelectors.title, profileComponentSelectors.subtitle);
+const userInfo = new UserInfo(
+  profileComponentSelectors.name,
+  profileComponentSelectors.about,
+  profileComponentSelectors.avatar
+);
 const section = new Section({ items: cards, renderer: createCard }, cardsContainerSelector);
 
 function openProfilePopup() {
+  const user = userInfo.getUserInfo();
   const inputValues = {
-    [profileFormInputSelectors.name]: userInfo.getUserInfo().name,
-    [profileFormInputSelectors.profession]: userInfo.getUserInfo().profession,
+    [profileFormInputSelectors.name]: user.name,
+    [profileFormInputSelectors.about]: user.about,
   };
   profilePopup.open(inputValues);
 }
@@ -33,7 +41,7 @@ function openProfilePopup() {
 function handleProfileFormSubmit(inputValues) {
   const data = {
     name: inputValues[getElement(profileFormInputSelectors.name).name],
-    profession: inputValues[getElement(profileFormInputSelectors.profession).name],
+    about: inputValues[getElement(profileFormInputSelectors.about).name],
   };
   userInfo.setUserInfo(data);
   profilePopup.close();
@@ -69,5 +77,15 @@ function setEventListeners() {
   getElement(profileComponentSelectors.addButton).addEventListener('click', openCardPopup);
 }
 
+function getUserInfo() {
+  api
+    .getUserInfo()
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    })
+    .catch((error) => console.log(error));
+}
+
+getUserInfo();
 section.render();
 setEventListeners();

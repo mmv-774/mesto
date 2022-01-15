@@ -20,15 +20,16 @@ export const formComponentSelectors = {
 };
 
 export const profileComponentSelectors = {
-  title: '.profile__title',
-  subtitle: '.profile__subtitle',
+  name: '.profile__title',
+  about: '.profile__subtitle',
+  avatar: '.profile__avatar',
   editButton: '.profile__btn_action_edit',
   addButton: '.profile__btn_action_add',
 };
 
 export const profileFormInputSelectors = {
   name: '.user-name-input',
-  profession: '.user-profession-input',
+  about: '.user-profession-input',
 };
 
 export const photoComponentSelectors = {

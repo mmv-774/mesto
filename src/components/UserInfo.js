@@ -1,21 +1,23 @@
 import { getElement } from '../utils/utils.js';
 
 class UserInfo {
-  constructor(nameElementSelector, professionElementSelector) {
+  constructor(nameElementSelector, aboutElementSelector, avatarElementSelector) {
     this._nameElement = getElement(nameElementSelector);
-    this._professionElement = getElement(professionElementSelector);
+    this._aboutElement = getElement(aboutElementSelector);
+    this._avatarElement = getElement(avatarElementSelector);
   }
 
   getUserInfo() {
     return {
       name: this._nameElement.textContent,
-      profession: this._professionElement.textContent,
+      about: this._aboutElement.textContent,
     };
   }
 
-  setUserInfo({ name, profession }) {
+  setUserInfo({ name, about, avatar }) {
     this._nameElement.textContent = name;
-    this._professionElement.textContent = profession;
+    this._aboutElement.textContent = about;
+    this._avatarElement.src = avatar;
   }
 }
 
