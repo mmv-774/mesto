@@ -1,8 +1,7 @@
 import { getElement } from '../utils/utils.js';
 
 class Section {
-  constructor({ items, renderer }, containerSelector) {
-    this._items = items;
+  constructor(renderer, containerSelector) {
     this._renderer = renderer;
     this._container = getElement(containerSelector);
   }
@@ -15,9 +14,9 @@ class Section {
     this._container.prepend(element);
   }
 
-  render() {
+  render(items) {
     this._clear();
-    this._items.forEach((item) => this._container.append(this._renderer(item)));
+    items.forEach((item) => this._container.append(this._renderer(item)));
   }
 }
 

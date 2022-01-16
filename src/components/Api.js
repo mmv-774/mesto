@@ -14,10 +14,20 @@ class Api {
     });
   }
 
-  getUserInfo() {
+  _getUserInfo() {
     return this._sendRequest('users/me', {
       headers: this._headers,
     });
+  }
+
+  _getCards() {
+    return this._sendRequest('cards', {
+      headers: this._headers,
+    });
+  }
+
+  getUserPage() {
+    return Promise.all([this._getUserInfo(), this._getCards()]);
   }
 }
 

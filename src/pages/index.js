@@ -10,7 +10,6 @@ import {
   apiOptions,
   popupElementSelectors,
   profileComponentSelectors,
-  cards,
   cardsContainerSelector,
   profileFormInputSelectors,
   cardTemplateSelector,
@@ -27,7 +26,7 @@ const userInfo = new UserInfo(
   profileComponentSelectors.about,
   profileComponentSelectors.avatar
 );
-const section = new Section({ items: cards, renderer: createCard }, cardsContainerSelector);
+const section = new Section(createCard, cardsContainerSelector);
 
 function openProfilePopup() {
   const user = userInfo.getUserInfo();
@@ -77,15 +76,16 @@ function setEventListeners() {
   getElement(profileComponentSelectors.addButton).addEventListener('click', openCardPopup);
 }
 
-function getUserInfo() {
+function getUserPage() {
   api
-    .getUserInfo()
-    .then((data) => {
-      userInfo.setUserInfo(data);
+    .getUserPage()
+    .then((res) => {
+      const [user, cards] = res;
+      userInfo.setUserInfo(user);
+      section.render(cards);
     })
     .catch((error) => console.log(error));
 }
 
-getUserInfo();
-section.render();
+getUserPage();
 setEventListeners();
