@@ -63,7 +63,7 @@ function handleCardFormSubmit(inputValues) {
     name: inputValues[getElement(cardFormInputSelectors.name).name],
     link: inputValues[getElement(cardFormInputSelectors.link).name],
   };
-  section.addItem(createCard(card));
+  postNewCard(card);
   cardPopup.close();
 }
 
@@ -92,6 +92,15 @@ function patchUserInfo(user) {
     .patchUserInfo(user)
     .then((res) => {
       userInfo.setUserInfo(res);
+    })
+    .catch((error) => console.log(error));
+}
+
+function postNewCard(card) {
+  api
+    .postNewCard(card)
+    .then((res) => {
+      section.addItem(createCard(res));
     })
     .catch((error) => console.log(error));
 }

@@ -40,6 +40,17 @@ class Api {
       }),
     });
   }
+
+  postNewCard({ name, link }) {
+    return this._sendRequest('cards', {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    });
+  }
 }
 
 export default Api;
