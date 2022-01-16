@@ -38,11 +38,11 @@ function openProfilePopup() {
 }
 
 function handleProfileFormSubmit(inputValues) {
-  const data = {
+  const user = {
     name: inputValues[getElement(profileFormInputSelectors.name).name],
     about: inputValues[getElement(profileFormInputSelectors.about).name],
   };
-  userInfo.setUserInfo(data);
+  patchUserInfo(user);
   profilePopup.close();
 }
 
@@ -83,6 +83,15 @@ function getUserPage() {
       const [user, cards] = res;
       userInfo.setUserInfo(user);
       section.render(cards);
+    })
+    .catch((error) => console.log(error));
+}
+
+function patchUserInfo(user) {
+  api
+    .patchUserInfo(user)
+    .then((res) => {
+      userInfo.setUserInfo(res);
     })
     .catch((error) => console.log(error));
 }

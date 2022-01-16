@@ -29,6 +29,17 @@ class Api {
   getUserPage() {
     return Promise.all([this._getUserInfo(), this._getCards()]);
   }
+
+  patchUserInfo({ name, about }) {
+    return this._sendRequest('users/me', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    });
+  }
 }
 
 export default Api;
