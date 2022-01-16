@@ -42,6 +42,7 @@ export const cardComponentSelectors = {
   card: '.card',
   photo: '.card__photo',
   title: '.card__title',
+  likeCount: '.card__like-count',
   likeButton: '.card__btn_action_like',
   deleteButton: '.card__btn_action_delete',
 };

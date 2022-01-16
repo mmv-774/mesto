@@ -2,9 +2,10 @@ import { cardComponentSelectors, cardActiveLikeButtonClass } from '../utils/cons
 import { getElement } from '../utils/utils.js';
 
 class Card {
-  constructor({ name, link }, templateSelector, handleCardClick) {
+  constructor({ name, link, likes }, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
+    this._likes = likes;
     this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
     this._element = this._getTemplate();
@@ -19,6 +20,7 @@ class Card {
     return {
       photo: getElement(cardComponentSelectors.photo, this._element),
       title: getElement(cardComponentSelectors.title, this._element),
+      likeCount: getElement(cardComponentSelectors.likeCount, this._element),
       likeButton: getElement(cardComponentSelectors.likeButton, this._element),
       deleteButton: getElement(cardComponentSelectors.deleteButton, this._element),
     };
@@ -43,6 +45,7 @@ class Card {
     this._card.photo.src = this._link;
     this._card.photo.alt = this._name;
     this._card.title.textContent = this._name;
+    this._card.likeCount.textContent = this._likes.length;
 
     return this._element;
   }
