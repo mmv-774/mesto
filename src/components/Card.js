@@ -2,11 +2,12 @@ import { cardComponentSelectors, cardActiveLikeButtonClass } from '../utils/cons
 import { getElement } from '../utils/utils.js';
 
 class Card {
-  constructor({ name, link, likes }, templateSelector, handleCardClick) {
+  constructor({ name, link, likes }, templateSelector, { handleCardClick, handleDeleteCardClick }) {
     this._name = name;
     this._link = link;
     this._likes = likes;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCardClick = handleDeleteCardClick;
     this._templateSelector = templateSelector;
     this._element = this._getTemplate();
     this._card = this._getCardComposition();
@@ -37,7 +38,7 @@ class Card {
   _setEventListeners() {
     this._card.photo.addEventListener('click', (evt) => this._handleCardClick(evt.target.src, evt.target.alt));
     this._card.likeButton.addEventListener('click', (evt) => this._toggleLike(evt));
-    this._card.deleteButton.addEventListener('click', (evt) => this._remove(evt));
+    this._card.deleteButton.addEventListener('click', () => this._handleDeleteCardClick());
   }
 
   create() {

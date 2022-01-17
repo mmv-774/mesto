@@ -10,6 +10,7 @@ export const popupElementSelectors = {
   profile: '.profile-popup',
   card: '.card-popup',
   photo: '.photo-popup',
+  confirm: '.confirm-popup',
 };
 
 export const formComponentSelectors = {

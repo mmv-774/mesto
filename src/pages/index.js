@@ -3,6 +3,7 @@ import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { getElement } from '../utils/utils.js';
@@ -21,6 +22,7 @@ const api = new Api(apiOptions);
 const profilePopup = new PopupWithForm(popupElementSelectors.profile, handleProfileFormSubmit, createFormValidator);
 const cardPopup = new PopupWithForm(popupElementSelectors.card, handleCardFormSubmit, createFormValidator);
 const photoPopup = new PopupWithImage(popupElementSelectors.photo);
+const confirmPopup = new PopupWithConfirm(popupElementSelectors.confirm);
 const userInfo = new UserInfo(
   profileComponentSelectors.name,
   profileComponentSelectors.about,
@@ -54,8 +56,21 @@ function openCardPopup() {
   cardPopup.open();
 }
 
-function createCard(card, templateSelector = cardTemplateSelector, handleCardClick = openPhotoPopup) {
-  return new Card(card, templateSelector, handleCardClick).create();
+function openConfirmPopup() {
+  confirmPopup.open();
+}
+
+function createCard(
+  card,
+  templateSelector = cardTemplateSelector,
+  handleCardClick = openPhotoPopup,
+  handleDeleteCardClick = openConfirmPopup
+) {
+  const handles = {
+    handleCardClick,
+    handleDeleteCardClick,
+  };
+  return new Card(card, templateSelector, handles).create();
 }
 
 function handleCardFormSubmit(inputValues) {
