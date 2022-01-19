@@ -51,6 +51,13 @@ class Api {
       }),
     });
   }
+
+  deleteCard(cardId) {
+    return this._sendRequest(`cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    });
+  }
 }
 
 export default Api;
