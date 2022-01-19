@@ -2,15 +2,18 @@ import { cardComponentSelectors, cardActiveLikeButtonClass } from '../utils/cons
 import { getElement } from '../utils/utils.js';
 
 class Card {
-  constructor({ name, link, likes }, templateSelector, { handleCardClick, handleDeleteCardClick }) {
+  constructor({ _id, name, link, likes, owner }, userId, templateSelector, { handleCardClick, handleDeleteCardClick }) {
+    this._id = _id;
     this._name = name;
     this._link = link;
     this._likes = likes;
+    this._owner = owner;
+    this._userId = userId;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCardClick = handleDeleteCardClick;
     this._templateSelector = templateSelector;
     this._element = this._getTemplate();
-    this._card = this._getCardComposition();
+    this._composition = this._getCardComposition();
   }
 
   _getTemplate() {
@@ -27,8 +30,8 @@ class Card {
     };
   }
 
-  _remove(evt) {
-    evt.target.closest(cardComponentSelectors.card).remove();
+  _checkIsOwner() {
+    return this._owner._id === this._userId;
   }
 
   _toggleLike(evt) {
@@ -36,17 +39,21 @@ class Card {
   }
 
   _setEventListeners() {
-    this._card.photo.addEventListener('click', (evt) => this._handleCardClick(evt.target.src, evt.target.alt));
-    this._card.likeButton.addEventListener('click', (evt) => this._toggleLike(evt));
-    this._card.deleteButton.addEventListener('click', () => this._handleDeleteCardClick());
+    this._composition.photo.addEventListener('click', (evt) => this._handleCardClick(evt.target.src, evt.target.alt));
+    this._composition.likeButton.addEventListener('click', (evt) => this._toggleLike(evt));
+    if (this._checkIsOwner()) {
+      this._composition.deleteButton.addEventListener('click', () => this._handleDeleteCardClick(this._id));
+    }
   }
 
   create() {
     this._setEventListeners();
-    this._card.photo.src = this._link;
-    this._card.photo.alt = this._name;
-    this._card.title.textContent = this._name;
-    this._card.likeCount.textContent = this._likes.length;
+    this._element.id = this._id;
+    this._composition.photo.src = this._link;
+    this._composition.photo.alt = this._name;
+    this._composition.title.textContent = this._name;
+    this._composition.likeCount.textContent = this._likes.length;
+    this._composition.deleteButton.hidden = !this._checkIsOwner();
 
     return this._element;
   }

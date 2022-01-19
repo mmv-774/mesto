@@ -45,7 +45,6 @@ function handleProfileFormSubmit(inputValues) {
     about: inputValues[getElement(profileFormInputSelectors.about).name],
   };
   patchUserInfo(user);
-  profilePopup.close();
 }
 
 function openPhotoPopup(link, name) {
@@ -56,21 +55,23 @@ function openCardPopup() {
   cardPopup.open();
 }
 
-function openConfirmPopup() {
-  confirmPopup.open();
-}
-
 function createCard(
   card,
   templateSelector = cardTemplateSelector,
   handleCardClick = openPhotoPopup,
-  handleDeleteCardClick = openConfirmPopup
+  handleDeleteCardClick = handleDeleteCard
 ) {
+  const userId = userInfo.getUserInfo().id;
   const handles = {
     handleCardClick,
     handleDeleteCardClick,
   };
-  return new Card(card, templateSelector, handles).create();
+  return new Card(card, userId, templateSelector, handles).create();
+}
+
+function handleDeleteCard(cardId) {
+  confirmPopup.setAceptConfirmAction(() => deleteCard(cardId));
+  confirmPopup.open();
 }
 
 function handleCardFormSubmit(inputValues) {
@@ -79,7 +80,6 @@ function handleCardFormSubmit(inputValues) {
     link: inputValues[getElement(cardFormInputSelectors.link).name],
   };
   postNewCard(card);
-  cardPopup.close();
 }
 
 function createFormValidator(config, formElement) {
@@ -107,6 +107,7 @@ function patchUserInfo(user) {
     .patchUserInfo(user)
     .then((res) => {
       userInfo.setUserInfo(res);
+      profilePopup.close();
     })
     .catch((error) => console.log(error));
 }
@@ -116,6 +117,17 @@ function postNewCard(card) {
     .postNewCard(card)
     .then((res) => {
       section.addItem(createCard(res));
+      cardPopup.close();
+    })
+    .catch((error) => console.log(error));
+}
+
+function deleteCard(cardId) {
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      document.getElementById(`${cardId}`).remove();
+      confirmPopup.close();
     })
     .catch((error) => console.log(error));
 }

@@ -9,12 +9,16 @@ class UserInfo {
 
   getUserInfo() {
     return {
-      name: this._nameElement.textContent,
-      about: this._aboutElement.textContent,
+      id: this._id,
+      name: this._name,
+      about: this._about,
     };
   }
 
-  setUserInfo({ name, about, avatar }) {
+  setUserInfo({ _id, name, about, avatar }) {
+    this._id = _id;
+    this._name = name;
+    this._about = about;
     this._nameElement.textContent = name;
     this._aboutElement.textContent = about;
     this._avatarElement.src = avatar;
