@@ -13,11 +13,18 @@ class PopupWithConfirm extends Popup {
     };
   }
 
+  _handleConfirmSubmit(evt) {
+    evt.preventDefault();
+    this._aceptConfirmAction();
+  }
+
   _setEventListeners() {
-    this._composition.form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
+    this._composition.form.addEventListener('submit', (evt) => this._handleConfirmSubmit(evt));
     super._setEventListeners();
+  }
+
+  setAceptConfirmAction(action) {
+    this._aceptConfirmAction = action;
   }
 }
 
