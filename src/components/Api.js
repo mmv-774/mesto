@@ -58,6 +58,13 @@ class Api {
       headers: this._headers,
     });
   }
+
+  patchAvatar(avatar) {
+    return this._sendRequest(`users/me/${avatar}`, {
+      method: 'PATCH',
+      headers: this._headers,
+    });
+  }
 }
 
 export default Api;
