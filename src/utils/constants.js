@@ -11,6 +11,7 @@ export const popupElementSelectors = {
   card: '.card-popup',
   photo: '.photo-popup',
   confirm: '.confirm-popup',
+  avatar: '.avatar-popup',
 };
 
 export const formComponentSelectors = {
@@ -26,6 +27,7 @@ export const profileComponentSelectors = {
   avatar: '.profile__avatar',
   editButton: '.profile__btn_action_edit',
   addButton: '.profile__btn_action_add',
+  avatarEditButton: '.profile__btn_action_avatar-edit',
 };
 
 export const profileFormInputSelectors = {
@@ -51,6 +53,10 @@ export const cardComponentSelectors = {
 export const cardFormInputSelectors = {
   name: '.card-name-input',
   link: '.card-link-input',
+};
+
+export const avatarFormInputSelectors = {
+  link: '.avatar-link-input',
 };
 
 export const cardTemplateSelector = '.card-template';
