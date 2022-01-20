@@ -19,6 +19,7 @@ export const formComponentSelectors = {
   title: '.form__title',
   input: '.form__input',
   handler: '.form__handler',
+  submitHandler: '.form__submit-handler',
 };
 
 export const profileComponentSelectors = {

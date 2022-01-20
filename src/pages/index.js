@@ -115,23 +115,27 @@ function getUserPage() {
 }
 
 function patchUserInfo(user) {
+  profilePopup.enableLoadingMode();
   api
     .patchUserInfo(user)
     .then((res) => {
       userInfo.setUserInfo(res);
       profilePopup.close();
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error))
+    .finally(() => profilePopup.disableLoadingMode());
 }
 
 function postNewCard(card) {
+  cardPopup.enableLoadingMode();
   api
     .postNewCard(card)
     .then((res) => {
       section.addItem(createCard(res));
       cardPopup.close();
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error))
+    .finally(() => cardPopup.disableLoadingMode());
 }
 
 function deleteCard(cardId) {
@@ -145,6 +149,7 @@ function deleteCard(cardId) {
 }
 
 function patchAvatar(avatar) {
+  avatarPopup.enableLoadingMode();
   api
     .patchAvatar(avatar)
     .then((res) => {
@@ -152,7 +157,8 @@ function patchAvatar(avatar) {
       getElement(profileComponentSelectors.avatar).src = res.avatar;
       avatarPopup.close();
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error))
+    .finally(() => avatarPopup.disableLoadingMode());
 }
 
 getUserPage();

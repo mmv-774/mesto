@@ -8,11 +8,13 @@ class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._formValidator = createFormValidator(formValidatorConfig, this._composition.form);
     this._formValidator.enableValidation();
+    this._submitButtonText = this._composition.submit.textContent;
   }
 
   _getComposition() {
     return {
       form: getElement(formComponentSelectors.form, this._element),
+      submit: getElement(formComponentSelectors.submitHandler, this._element),
     };
   }
 

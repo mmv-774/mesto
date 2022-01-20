@@ -42,6 +42,16 @@ class Popup {
     this._element.classList.remove(popupOpenClass);
     document.removeEventListener('keydown', this._closeByEsc);
   }
+
+  enableLoadingMode() {
+    this._composition.submit.textContent = 'Сохранение...';
+    this._composition.submit.disabled = true;
+  }
+
+  disableLoadingMode() {
+    this._composition.submit.textContent = this._submitButtonText;
+    this._composition.submit.disabled = false;
+  }
 }
 
 export default Popup;
