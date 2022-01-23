@@ -65,12 +65,14 @@ function createCard(
   card,
   templateSelector = cardTemplateSelector,
   handleCardClick = openPhotoPopup,
-  handleDeleteCardClick = handleDeleteCard
+  handleDeleteCardClick = handleDeleteCard,
+  handleLikeCardClick = handleLikeCard
 ) {
   const userId = userInfo.getUserInfo().id;
   const handles = {
     handleCardClick,
     handleDeleteCardClick,
+    handleLikeCardClick,
   };
   return new Card(card, userId, templateSelector, handles).create();
 }
@@ -78,6 +80,10 @@ function createCard(
 function handleDeleteCard(cardId) {
   confirmPopup.setAceptConfirmAction(() => deleteCard(cardId));
   confirmPopup.open();
+}
+
+function handleLikeCard(card) {
+  setLike(card);
 }
 
 function handleCardFormSubmit(inputValues) {
@@ -159,6 +165,15 @@ function patchAvatar(avatar) {
     })
     .catch((error) => console.log(error))
     .finally(() => avatarPopup.disableLoadingMode());
+}
+
+function setLike(card) {
+  api
+    .setLike(card.id, card.isLiked())
+    .then((res) => {
+      card.renderLikeState(res);
+    })
+    .catch((error) => console.log(error));
 }
 
 getUserPage();

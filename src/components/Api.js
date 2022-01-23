@@ -68,6 +68,14 @@ class Api {
       }),
     });
   }
+
+  setLike(cardId, isLiked) {
+    const method = isLiked ? 'DELETE' : 'PUT';
+    return this._sendRequest(`cards/${cardId}/likes`, {
+      method: method,
+      headers: this._headers,
+    });
+  }
 }
 
 export default Api;
